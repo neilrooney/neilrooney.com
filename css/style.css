@@ -32,3 +32,8 @@ li {
   float: left;
   margin-right: 20px;
 }
+
+a[href="https://github.com/neilrooney"], a[href="https://www.linkedin.com/in/neil-rooney/"] {
+    color: #0056b3; /* Darker blue for better contrast */
+    text-decoration: underline; /* Add underline to improve visibility */
+}
