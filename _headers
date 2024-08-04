@@ -1,12 +1,9 @@
 /*
-  Content-Security-Policy: default-src 'self'; font-src fonts.googleapis.com; script-src 'self' static.cloudflareinsights.com;
+  Content-Security-Policy: default-src 'self'; font-src https://fonts.googleapis.com; script-src 'self' https://static.cloudflareinsights.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self';
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer
   X-XSS-Protection: 1; mode=block
-
-https://:neilrooney.com
-  Content-Security-Policy: default-src 'self'; font-src fonts.googleapis.com; script-src 'self' static.cloudflareinsights.com;
 
 https://:neilrooney.com/images/*
   X-Robots-Tag: noindex
