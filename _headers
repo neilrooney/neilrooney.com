@@ -5,7 +5,7 @@
   Referrer-Policy: no-referrer
   X-XSS-Protection: 1; mode=block
 
-https://:neilrooney.com/*
+https://:neilrooney.com
   Content-Security-Policy: default-src 'self'; font-src fonts.googleapis.com; script-src 'self' static.cloudflareinsights.com;
 
 https://:neilrooney.com/images/*
