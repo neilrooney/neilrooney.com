@@ -1,9 +1,9 @@
 /*
+  Content-Security-Policy: default-src 'self';font-src fonts.googleapis.com;script-src 'self' static.cloudflareinsights.com;
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer
   X-XSS-Protection: 1; mode=block
-  Content-Security-Policy: default-src 'self';font-src fonts.googleapis.com;script-src 'self' static.cloudflareinsights.com;
 
 https://:neilrooney.com/images/*
   X-Robots-Tag: noindex
