@@ -1,5 +1,4 @@
 /*
-  Content-Security-Policy: default-src 'self'; font-src https://fonts.googleapis.com; script-src 'self' https://static.cloudflareinsights.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self';
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer
