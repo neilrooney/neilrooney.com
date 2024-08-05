@@ -5,6 +5,9 @@
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
 
+https://neilrooney.com
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; img-src 'self'; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; media-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;
+
 https://:neilrooney.com/css/*
   X-Robots-Tag: noindex
 
