@@ -4,6 +4,9 @@
   Referrer-Policy: no-referrer
   X-XSS-Protection: 1; mode=block
 
+https://:neilrooney.com/
+  X-Robots-Tag: noindex
+
 https://:neilrooney.com/images/*
   X-Robots-Tag: noindex
 
