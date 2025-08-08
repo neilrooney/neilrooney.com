@@ -1,0 +1,18 @@
+User-agent: *
+Disallow: /
+
+User-agent: Googlebot
+Allow: /
+Disallow: /css/
+Disallow: /images/
+
+User-agent: Kagibot
+Allow: /
+Disallow: /css/
+Disallow: /images/
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: PerplexityAI
+Disallow: /
