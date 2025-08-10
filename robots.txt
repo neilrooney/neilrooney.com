@@ -6,13 +6,4 @@ Allow: /
 Disallow: /css/
 Disallow: /images/
 
-User-agent: Kagibot
-Allow: /
-Disallow: /css/
-Disallow: /images/
-
-User-agent: PerplexityBot
-Disallow: /
-
-User-agent: PerplexityAI
-Disallow: /
+Sitemap: https://neilrooney.com/sitemap.xml
