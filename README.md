@@ -20,4 +20,4 @@ Special thanks to [Leah Culver](https://github.com/leah/leah.github.io) whose or
 
 ---
 
-Built with ☕ in Berlin
+Built with ☕in Berlin
