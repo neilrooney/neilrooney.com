@@ -19,5 +19,3 @@ This repository contains the source code for my personal website at [neilrooney.
 Special thanks to [Leah Culver](https://github.com/leah/leah.github.io) whose original code formed the base for this site.
 
 ---
-
-Built with ☕in Berlin
