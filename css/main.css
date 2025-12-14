@@ -47,7 +47,6 @@ blockquote, q {
 :root {
   --primary-color: #009999;
   --link-hover: #006666;
-  --social-link-color: #0056b3;
   --text-color: #000;
   --background-color: #fff;
   --spacing-base: 20px;
@@ -106,11 +105,6 @@ li {
   margin-right: var(--spacing-base);
 }
 
-a[href="https://github.com/neilrooney"], 
-a[href="https://www.linkedin.com/in/neil-rooney/"], 
-a[href="https://bsky.app/profile/neilrooney.com"] {
-    color: var(--social-link-color);
-}
 
 
 @media only screen and (max-width: 480px) {
