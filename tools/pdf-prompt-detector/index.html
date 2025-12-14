@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Prompt Injection Detector | Tools | Neil Rooney</title>
+    <meta name="description" content="Upload a PDF to detect potential prompt injection attempts. Screen documents before processing with AI.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/tools.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs" type="module"></script>
+</head>
+<body>
+    <main class="container">
+        <a href="../" class="back-link">&larr; Back to Tools</a>
+
+        <h1>PDF Prompt Injection Detector</h1>
+
+        <p>Upload a PDF to scan for potential prompt injection attempts. All processing happens in your browser &mdash; no files are uploaded to any server.</p>
+
+        <div class="upload-area" id="uploadArea">
+            <p>Drop a PDF here or click to select</p>
+            <p class="hint">Supports PDF files only</p>
+            <input type="file" id="fileInput" accept=".pdf,application/pdf">
+        </div>
+
+        <div class="loading" id="loading">
+            <p>Scanning PDF...</p>
+        </div>
+
+        <div class="results" id="results">
+            <div class="status" id="status"></div>
+            <div class="detection-list" id="detectionList"></div>
+        </div>
+    </main>
+
+    <script type="module">
+        const pdfjsLib = await import('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs');
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.mjs';
+
+        const injectionPatterns = [
+            { pattern: /ignore\s+(all\s+)?(previous|prior|above)\s+(instructions?|prompts?|context)/gi, name: 'Ignore instructions' },
+            { pattern: /disregard\s+(all\s+)?(previous|prior|above)/gi, name: 'Disregard previous' },
+            { pattern: /forget\s+(everything|all)\s+(above|before|previous)/gi, name: 'Forget previous' },
+            { pattern: /you\s+are\s+now\s+(a|an)\s+/gi, name: 'Role override' },
+            { pattern: /act\s+as\s+(if\s+)?(you\s+are\s+)?(a|an)\s+/gi, name: 'Role injection' },
+            { pattern: /pretend\s+(you\s+are|to\s+be)\s+/gi, name: 'Pretend role' },
+            { pattern: /new\s+instructions?:/gi, name: 'New instructions' },
+            { pattern: /system\s+prompt:/gi, name: 'System prompt' },
+            { pattern: /\[system\]/gi, name: 'System tag' },
+            { pattern: /important:\s*(override|ignore|disregard)/gi, name: 'Override directive' },
+            { pattern: /do\s+not\s+follow\s+(the\s+)?(previous|prior|above)/gi, name: 'Do not follow' },
+            { pattern: /override\s+(previous|prior|all)\s+(instructions?|prompts?)/gi, name: 'Override instructions' },
+            { pattern: /reset\s+(your\s+)?(instructions?|context|memory)/gi, name: 'Reset instructions' },
+            { pattern: /from\s+now\s+on,?\s+(you\s+)?(will|must|should)/gi, name: 'From now on directive' },
+            { pattern: /stop\s+being\s+(a|an)\s+/gi, name: 'Stop being' },
+            { pattern: /jailbreak/gi, name: 'Jailbreak keyword' },
+            { pattern: /\bDAN\b.*?(mode|prompt|jailbreak)/gi, name: 'DAN reference' },
+            { pattern: /developer\s+mode\s+(enabled|on|activated)/gi, name: 'Developer mode' },
+            { pattern: /bypass\s+(content\s+)?(filter|policy|restriction)/gi, name: 'Bypass filter' },
+            { pattern: /\u200b|\u200c|\u200d|\u2060|\ufeff/g, name: 'Hidden Unicode characters' },
+        ];
+
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const loading = document.getElementById('loading');
+        const results = document.getElementById('results');
+        const status = document.getElementById('status');
+        const detectionList = document.getElementById('detectionList');
+
+        uploadArea.addEventListener('click', () => fileInput.click());
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type === 'application/pdf') {
+                processFile(file);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                processFile(file);
+            }
+        });
+
+        async function processFile(file) {
+            loading.classList.add('visible');
+            results.classList.remove('visible');
+
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+                const detections = [];
+
+                for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                    const page = await pdf.getPage(pageNum);
+                    const textContent = await page.getTextContent();
+                    const pageText = textContent.items.map(item => item.str).join(' ');
+
+                    for (const { pattern, name } of injectionPatterns) {
+                        pattern.lastIndex = 0;
+                        let match;
+                        while ((match = pattern.exec(pageText)) !== null) {
+                            const start = Math.max(0, match.index - 50);
+                            const end = Math.min(pageText.length, match.index + match[0].length + 50);
+                            const context = pageText.slice(start, end);
+
+                            detections.push({
+                                page: pageNum,
+                                type: name,
+                                match: match[0],
+                                context: (start > 0 ? '...' : '') + context + (end < pageText.length ? '...' : '')
+                            });
+                        }
+                    }
+                }
+
+                displayResults(detections);
+            } catch (error) {
+                status.className = 'status warning';
+                status.innerHTML = '<strong>Error:</strong> Could not process the PDF. Please ensure it is a valid PDF file.';
+                results.classList.add('visible');
+            } finally {
+                loading.classList.remove('visible');
+            }
+        }
+
+        function displayResults(detections) {
+            detectionList.innerHTML = '';
+
+            if (detections.length === 0) {
+                status.className = 'status clean';
+                status.innerHTML = '<strong>No issues detected.</strong> This PDF appears to be free of common prompt injection patterns.';
+            } else {
+                status.className = 'status warning';
+                status.innerHTML = `<strong>Warning:</strong> Found ${detections.length} potential prompt injection${detections.length > 1 ? 's' : ''}.`;
+
+                for (const detection of detections) {
+                    const item = document.createElement('div');
+                    item.className = 'detection-item';
+                    item.innerHTML = `
+                        <p class="page">Page ${detection.page} &mdash; ${detection.type}</p>
+                        <p>Matched: <code>${escapeHtml(detection.match)}</code></p>
+                        <div class="text">${escapeHtml(detection.context)}</div>
+                    `;
+                    detectionList.appendChild(item);
+                }
+            }
+
+            results.classList.add('visible');
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>
