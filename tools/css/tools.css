@@ -210,6 +210,116 @@ p {
   display: block;
 }
 
+/* Input section */
+.input-section {
+  margin: var(--spacing-double) 0;
+}
+
+.input-section label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.input-section textarea {
+  width: 100%;
+  min-height: 200px;
+  padding: var(--spacing-base);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  resize: vertical;
+  box-sizing: border-box;
+  line-height: 1.5;
+}
+
+.input-section textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+/* Buttons */
+.primary-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-family: var(--font-family);
+  cursor: pointer;
+  margin-top: var(--spacing-base);
+  margin-right: 10px;
+}
+
+.primary-btn:hover {
+  background-color: var(--link-hover);
+}
+
+.secondary-btn {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  padding: 10px 20px;
+  font-size: 1em;
+  font-family: var(--font-family);
+  cursor: pointer;
+  margin-top: var(--spacing-base);
+}
+
+.secondary-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.copy-btn {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  padding: 5px 15px;
+  font-size: 0.9em;
+  font-family: var(--font-family);
+  cursor: pointer;
+}
+
+.copy-btn:hover {
+  background-color: #f0f0f0;
+}
+
+/* Output header */
+.output-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-base);
+}
+
+.output-header h2 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+/* Code output */
+.code-output {
+  background-color: #f8f8f8;
+  border: 1px solid var(--border-color);
+  padding: var(--spacing-base);
+  overflow-x: auto;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre;
+  margin: 0;
+}
+
+/* Syntax highlighting */
+.syntax-key { color: #0451a5; }
+.syntax-string { color: #a31515; }
+.syntax-number { color: #098658; }
+.syntax-boolean { color: #0000ff; }
+.syntax-null { color: #0000ff; }
+.syntax-comment { color: #008000; font-style: italic; }
+.syntax-punctuation { color: #000000; }
+
 /* Responsive */
 @media only screen and (max-width: 480px) {
   .container {
@@ -218,5 +328,18 @@ p {
 
   .upload-area {
     padding: var(--spacing-base);
+  }
+
+  .output-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .output-header h2 {
+    margin-bottom: 10px;
+  }
+
+  .input-section textarea {
+    min-height: 150px;
   }
 }
