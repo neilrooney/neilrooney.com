@@ -1,5 +1,5 @@
 
-html, body, h1, h2, p, a, img, ul, li, main, section, nav, div, button, input, label {
+html, body, h1, h2, p, a, img, ul, li, main, section, nav, div, button, input, textarea, label {
     margin: 0;
     padding: 0;
     border: 0;
@@ -59,6 +59,7 @@ blockquote, q {
   --warning-color: #d9534f;
   --success-color: #5cb85c;
   --border-color: #ddd;
+  --text-muted: #666;
 }
 
 
@@ -113,7 +114,7 @@ p {
 }
 
 .tool-description {
-  color: #666;
+  color: var(--text-muted);
   font-size: 0.9em;
 }
 
@@ -142,7 +143,7 @@ p {
 }
 
 .upload-area .hint {
-  color: #666;
+  color: var(--text-muted);
   font-size: 0.9em;
   margin-top: var(--spacing-base);
 }
