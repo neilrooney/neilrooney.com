@@ -1,139 +1,149 @@
-
-html, body, h1, p, a, img, ul, li, main, section, nav {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    font-weight: inherit;
-    font-style: normal;
-    font-size: 100%;
-    vertical-align: baseline;
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-:focus {
-    outline: 0;
-}
-
-body {
-    line-height: 1;
-    color: black;
-    background: white;
-}
-
-ul {
-    list-style: none;
-}
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-caption, th, td {
-    text-align: left;
-    font-weight: normal;
-}
-
-blockquote:before, blockquote:after,
-q:before, q:after {
-    content: "";
-}
-
-blockquote, q {
-    quotes: "" "";
-}
-
-
+/* Custom Properties */
 :root {
-  --primary-color: #009999;
-  --link-hover: #006666;
-  --text-color: #000;
-  --background-color: #fff;
-  --spacing-base: 20px;
-  --spacing-double: 40px;
-  --spacing-triple: 60px;
-  --font-family: "Open Sans", sans-serif;
-  --font-size-base: 1em;
-  --font-size-large: 2em;
-  --line-height: 2em;
+  --text-primary: #000;
+  --text-secondary: #555;
+  --background: #fff;
+  --border: #e0e0e0;
+  --font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 4rem;
+  --max-width: 600px;
 }
 
+/* Base */
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 body {
   font-family: var(--font-family);
-  font-weight: 300;
-  line-height: var(--line-height);
-  color: var(--text-color);
-  background: var(--background-color);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--background);
+  min-height: 100vh;
 }
 
+/* Typography */
+h1 {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.title {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-top: var(--spacing-xs);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+}
+
+.intro {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+  max-width: 32ch;
+}
+
+/* Cursor */
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 0.9em;
+  background: var(--text-primary);
+  margin-left: 4px;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Links */
 a {
-  color: var(--primary-color);
+  color: var(--text-primary);
   text-decoration: none;
 }
 
 a:hover {
   text-decoration: underline;
-  color: var(--link-hover);
 }
 
-h1 {
-  font-size: var(--font-size-large);
-}
-
+/* Layout */
 #content {
   display: flex;
-  margin: var(--spacing-triple) auto;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  padding: var(--spacing-xl) var(--spacing-lg);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  min-height: 100vh;
+  justify-content: center;
 }
 
+/* Photo */
+#photo img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  object-fit: cover;
+}
+
+/* Description */
 #description {
-  margin-right: var(--spacing-double);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
 }
 
-#photo {
-  float: left;
-  margin: 0 var(--spacing-double);
+/* Navigation */
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm) var(--spacing-md);
+  margin-top: var(--spacing-xs);
 }
 
-p,
-ul {
-  margin-top: var(--spacing-double);
+nav a {
+  font-size: 0.9375rem;
+  padding: var(--spacing-xs) 0;
 }
 
-li {
-  float: left;
-  margin-right: var(--spacing-base);
-}
-
-
-
-@media only screen and (max-width: 480px) {
+/* Mobile */
+@media (max-width: 640px) {
   #content {
-    display: block;
-    width: 100%;
-    margin: 0;
+    padding: var(--spacing-xl) var(--spacing-md);
+    align-items: center;
+    text-align: center;
   }
-  
-  #photo {
-    display: block;
-    margin: var(--spacing-base);
+
+  .intro {
+    max-width: none;
   }
-  
-  #photo img {
-    width: 100%;
-    height: auto;
-  }
-  
-  #description {
-    clear: both;
-    margin: var(--spacing-base);
-  }
-  
-  h1 {
-    margin-bottom: var(--spacing-base);
-  }
-  
-  p, ul {
-    margin: 0;
+
+  nav ul {
+    justify-content: center;
   }
 }

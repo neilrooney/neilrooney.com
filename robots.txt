@@ -5,6 +5,5 @@ User-agent: Googlebot
 Allow: /
 Disallow: /css/
 Disallow: /images/
-Disallow: /tools/
 
 Sitemap: https://neilrooney.com/sitemap.xml
