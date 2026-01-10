@@ -13,5 +13,9 @@
   Cache-Control: public, max-age=31536000, immutable
   X-Robots-Tag: noindex
 
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  X-Robots-Tag: noindex
+
 https://neilrooney.pages.dev/*
   X-Robots-Tag: noindex
