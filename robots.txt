@@ -6,4 +6,8 @@ Allow: /
 Disallow: /css/
 Disallow: /images/
 
+User-agent: Googlebot-Image
+Allow: /favicon.png
+Disallow: /
+
 Sitemap: https://neilrooney.com/sitemap.xml
