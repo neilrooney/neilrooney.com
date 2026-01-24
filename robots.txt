@@ -3,7 +3,6 @@ Disallow: /
 
 User-agent: Googlebot
 Allow: /
-Disallow: /css/
 Disallow: /images/
 
 User-agent: Googlebot-Image
