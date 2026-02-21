@@ -4,6 +4,9 @@
   X-Content-Type-Options: nosniff
   X-XSS-Protection: 1; mode=block
   Cache-Control: public, max-age=2592000
+  Link: </css/main.css>; rel=preload; as=style
+  Link: </fonts/Inter-Regular.woff2>; rel=preload; as=font; type=font/woff2; crossorigin
+  Link: </fonts/Inter-SemiBold.woff2>; rel=preload; as=font; type=font/woff2; crossorigin
 
 /css/*
   Cache-Control: public, max-age=31536000, immutable
