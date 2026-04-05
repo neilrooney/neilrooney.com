@@ -156,6 +156,75 @@ nav a {
   padding: var(--spacing-xs) 0;
 }
 
+/* Resume */
+#content.resume {
+  justify-content: flex-start;
+}
+
+.resume h2 {
+  color: var(--text-secondary);
+  font-weight: 400;
+  margin-bottom: calc(-1 * var(--spacing-xs));
+}
+
+.resume-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  width: 100%;
+}
+
+.resume-section + .resume-section {
+  border-top: 1px solid var(--border);
+  padding-top: var(--spacing-md);
+}
+
+.company {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  position: relative;
+  padding-left: var(--spacing-sm);
+}
+
+.company.promoted::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+
+.role-period {
+  display: flex;
+  flex-direction: column;
+}
+
+.role {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  gap: 0 var(--spacing-sm);
+}
+
+.role-date {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  white-space: nowrap;
+  padding-top: 2px;
+}
+
+.role-duration {
+  color: #999;
+  font-size: 0.8125rem;
+}
+
+.role-org {
+  color: #999;
+  font-size: 0.875rem;
+}
+
 /* Mobile */
 @media (max-width: 640px) {
   #content {
@@ -170,5 +239,21 @@ nav a {
 
   nav ul {
     justify-content: center;
+  }
+
+  .role {
+    grid-template-columns: 1fr;
+  }
+
+  .role-date {
+    padding-top: 0;
+  }
+
+  .company {
+    padding-left: 0;
+  }
+
+  .company.promoted::before {
+    display: none;
   }
 }
