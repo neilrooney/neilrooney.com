@@ -184,16 +184,22 @@ nav a {
   flex-direction: column;
   gap: var(--spacing-sm);
   position: relative;
+  padding-left: var(--spacing-sm);
 }
 
 .company.promoted::before {
   content: '';
   position: absolute;
-  left: calc(-1 * var(--spacing-sm));
+  left: 0;
   top: 0;
   bottom: 0;
   width: 2px;
   background: var(--border);
+}
+
+.role-period {
+  display: flex;
+  flex-direction: column;
 }
 
 .role {
@@ -241,6 +247,10 @@ nav a {
 
   .role-date {
     padding-top: 0;
+  }
+
+  .company {
+    padding-left: 0;
   }
 
   .company.promoted::before {
