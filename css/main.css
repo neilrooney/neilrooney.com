@@ -209,6 +209,11 @@ nav a {
   padding-top: 2px;
 }
 
+.role-duration {
+  color: #999;
+  font-size: 0.8125rem;
+}
+
 .role-org {
   color: #999;
   font-size: 0.875rem;
