@@ -1,23 +1,35 @@
-# Personal site
+# neilrooney.com
 
-A simple, lightweight personal site deployed on Cloudflare Pages.
+## Description
 
-## Overview
+This repository contains the source for Neil Rooney's personal website at [neilrooney.com](https://neilrooney.com).
 
-This repository contains the source code for my personal website at [neilrooney.com](https://neilrooney.com). It's a straightforward, minimalist single-page site built with vanilla HTML and CSS.
+The site presents a concise professional profile, profile image, and links to external profiles. It is intentionally small, has no build step, and can be previewed directly from the repository root.
 
-## Tech Stack
+## Setup Instructions
 
-- HTML5
-- CSS with custom variables
-- Responsive design
-- Optimised WebP images
-- Deployed via Cloudflare Pages
+No dependency installation is required.
 
-## Acknowledgments
+To preview the site locally, run a local static file server from the repository root:
 
-Special thanks to [Leah Culver](https://github.com/leah/leah.github.io) whose original code formed the base for this site.
+```bash
+python3 -m http.server 8000
+```
 
----
+Open `http://localhost:8000` in a browser.
 
-Built with ☕ in Berlin
+## Deployment
+
+The site is deployed through Cloudflare Pages. This repository does not define a GitHub Actions release workflow, package publishing workflow, or tagged release process.
+
+Before releasing production changes, confirm the active production branch and deployment trigger in the Cloudflare Pages project settings.
+
+## Troubleshooting / Known Issues
+
+If fonts, images, or absolute paths do not load locally, make sure the site is being served from the repository root rather than opened directly from the filesystem.
+
+Production security headers and cache rules are applied by Cloudflare Pages during deployment, so local previews will not exactly match production response headers.
+
+## Acknowledgements
+
+The original version of this site was based on work by [Leah Culver](https://github.com/leah/leah.github.io).
