@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /
+
+User-agent: Googlebot
+Allow: /
+Disallow: /images/
+
+User-agent: Googlebot-Image
+Allow: /
+
+Sitemap: https://neilrooney.com/sitemap.xml

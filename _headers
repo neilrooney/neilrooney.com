@@ -1,0 +1,23 @@
+/*
+  Content-Security-Policy: default-src 'none'; style-src 'self'; img-src 'self'; font-src 'self'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Cache-Control: public, max-age=2592000
+  Link: </css/main.css>; rel=preload; as=style
+  Link: </fonts/Inter-Regular.woff2>; rel=preload; as=font; type=font/woff2; crossorigin
+  Link: </fonts/Inter-SemiBold.woff2>; rel=preload; as=font; type=font/woff2; crossorigin
+
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+  X-Robots-Tag: noindex
+
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  X-Robots-Tag: noindex
+
+https://neilrooney.pages.dev/*
+  X-Robots-Tag: noindex
